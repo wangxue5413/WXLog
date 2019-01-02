@@ -21,14 +21,36 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_print_log).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < 100; i++) {
-                    LogPrinter.e("wangxue", "this is number %d", i);
-                }
+                printLog();
+            }
+        });
+        findViewById(R.id.btn_upload_log).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadLog();
             }
         });
     }
 
-    public void parseLog() {
+    private void parseLog() {
         new DecryptExecutor("abcdefghijkmlnop", FileUtil.getInputFile(this.getApplicationContext()), FileUtil.getOutPutFile(this.getApplicationContext())).parseLog();
+    }
+
+    private void printLog() {
+        for (int i = 0; i < 100; i++) {
+            LogPrinter.e("wangxue", "this is number %d", i);
+        }
+    }
+
+    private void uploadLog() {
+        /*HashMap<String, String> headers = new HashMap<>();
+        headers.put("Content-Type", "binary/octet-stream"); //二进制上传
+        headers.put("client", "android");
+        new RealSendLogRunnable.SendLogBuilder()
+                .setHeaders(headers)
+                .setMethod(RealSendLogRunnable.SendLogBuilder.POST)
+                .setUrl("http://192.168.1.7:3000/logupload")
+                .build()
+                .doIT();*/
     }
 }

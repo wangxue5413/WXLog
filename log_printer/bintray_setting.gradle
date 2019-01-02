@@ -14,7 +14,7 @@ allprojects {
 }
 
 publish {
-    userOrg = 'wangxue5413'
+    userOrg = 'wangxue'
     repoName = 'WXLog'
     groupId = 'com.wangxue.log_printer'
     artifactId = 'log_printer'
