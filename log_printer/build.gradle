@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply from: 'bintray_setting.gradle'
 
 android {
     compileSdkVersion Integer.parseInt("$CompileSDKVersion")
@@ -24,10 +25,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation "com.android.support:appcompat-v7:${SupportVersion}"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.dianping.android.sdk:logan:1.1.0'
-    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "com.dianping.android.sdk:logan:${LoganVersion}"
+    implementation "com.jakewharton.timber:timber:${TimberVersion}"
 }

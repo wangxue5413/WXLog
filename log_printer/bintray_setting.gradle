@@ -1,0 +1,24 @@
+apply plugin: 'maven'
+apply plugin: 'com.novoda.bintray-release'
+
+
+allprojects {
+    tasks.withType(JavaCompile) {    //设置全局编码
+        options.encoding = "UTF-8"
+    }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
+}
+
+publish {
+    userOrg = 'wangxue5413'
+    repoName = 'WXLog'
+    groupId = 'com.wangxue.log_printer'
+    artifactId = 'log_printer'
+    publishVersion = '1.0.0'
+    desc = 'log library'
+    website = 'https://github.com/wangxue5413/WXLog.git'
+}
