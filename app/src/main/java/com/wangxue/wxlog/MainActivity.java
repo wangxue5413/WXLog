@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.wangxue.log_printer.LogPrinter;
+import com.wangxue.log_printer.upload.RealSendLogRunnable;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadLog() {
-        /*HashMap<String, String> headers = new HashMap<>();
+        HashMap<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "binary/octet-stream"); //二进制上传
         headers.put("client", "android");
         new RealSendLogRunnable.SendLogBuilder()
@@ -51,6 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 .setMethod(RealSendLogRunnable.SendLogBuilder.POST)
                 .setUrl("http://192.168.1.7:3000/logupload")
                 .build()
-                .doIT();*/
+                .doIT();
     }
 }

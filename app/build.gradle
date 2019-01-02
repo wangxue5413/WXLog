@@ -33,5 +33,5 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:${SupportVersion}"
     implementation "com.android.support.constraint:constraint-layout:${ConstraintVersion}"
-    implementation project(':log_printer')
+    implementation "com.wangxue.log_printer:log_printer:${LogPrinterVersion}"
 }
