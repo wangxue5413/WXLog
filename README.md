@@ -13,7 +13,7 @@ Add following content to your root project `build.gradle` file:
 ```groovy
 allprojects {
     repositories {
-        maven { url "https://wangxue1214.bintray.com/WXLog" }
+        maven { url "https://wangxue1214.bintray.com/AndroidLibrary" }
     }
 }
 ```
@@ -21,7 +21,7 @@ allprojects {
 then add following content in the sub-project `build.gradle` file:
 
 ```groovy
-implementation 'com.wangxue.log_printer:log_printer:1.0.2'
+implementation 'com.wangxue.log_printer:log_printer:1.0.0'
 ```
 
 ### Usage

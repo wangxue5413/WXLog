@@ -3,10 +3,10 @@ apply plugin: 'com.novoda.bintray-release'
 
 publish {
     userOrg = 'wangxue1214'
-    repoName = 'WXLog'
+    repoName = 'AndroidLibrary'
     groupId = 'com.wangxue.log_printer'
     artifactId = 'log_printer'
-    publishVersion = '1.0.2'
+    publishVersion = '1.0.0'
     desc = 'log library'
     website = 'https://github.com/wangxue5413/WXLog.git'
 }
