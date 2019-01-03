@@ -12,7 +12,6 @@ public class DemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LogConfig.init(this, BuildConfig.PLANT_DEBUG, null, null, BuildConfig.ENABLE_LOG_TEST);
-        FileUtil.generateParseDir(this);
+        LogConfig.init(this, !BuildConfig.PLANT_DEBUG, null, null, BuildConfig.ENABLE_LOG_TEST);
     }
 }

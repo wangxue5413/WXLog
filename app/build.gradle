@@ -12,7 +12,7 @@ android {
     buildTypes {
         debug {
             buildConfigField "boolean", "PLANT_DEBUG", "true"
-            buildConfigField "boolean", "ENABLE_LOG_TEST", "true"
+            buildConfigField "boolean", "ENABLE_LOG_TEST", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -26,6 +26,11 @@ android {
 
     lintOptions {
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

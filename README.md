@@ -21,18 +21,18 @@ allprojects {
 then add following content in the sub-project `build.gradle` file:
 
 ```groovy
-implementation 'com.wangxue.log_printer:log_printer:1.0.0'
+implementation 'com.wangxue.log_printer:log_printer:1.0.2'
 ```
 
 ### Usage
 
-Initialization settings must be made before you use it, it is recommended in Application, for example:
+**Initialization settings must be made before you use it, it is recommended in Application, for example:**
 
 ```java
 LogConfig.init(this, BuildConfig.Debug, null, null, false);
 ```
 
-Print log:
+**Print log:**
 ```java
 LogPrinter.e("TAG", "print log");
 ```
@@ -41,12 +41,12 @@ or
 LogPrinter.e("TAG", "this is number %d", i);
 ```
 
-Parse log:
+**Parse log:**
 ```java
 new DecryptExecutor("your password", inputStream, outputStream).parseLog();
 ```
 
-Upload log:
+**Upload log:**
 ```java
 new RealSendLogRunnable.SendLogBuilder()
                 .setHeaders(headers)

@@ -2,7 +2,6 @@ package com.wangxue.wxlog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.wangxue.log_printer.LogPrinter;
 import com.wangxue.log_printer.upload.RealSendLogRunnable;
@@ -11,28 +10,15 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.btn_parse_log).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                parseLog();
-            }
-        });
-        findViewById(R.id.btn_print_log).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                printLog();
-            }
-        });
-        findViewById(R.id.btn_upload_log).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadLog();
-            }
-        });
+        findViewById(R.id.btn_parse_log).setOnClickListener((view) -> parseLog());
+        findViewById(R.id.btn_print_log).setOnClickListener((view) -> printLog());
+        findViewById(R.id.btn_upload_log).setOnClickListener((view) -> uploadLog());
     }
 
     private void parseLog() {
@@ -41,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void printLog() {
         for (int i = 0; i < 100; i++) {
-            LogPrinter.e("wangxue", "this is number %d", i);
+            LogPrinter.e(TAG, "this is number %d", i);
         }
     }
 

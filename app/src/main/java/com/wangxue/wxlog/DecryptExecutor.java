@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by wangxue on 2019/1/2.
@@ -34,6 +32,7 @@ public class DecryptExecutor {
 
     public static class DecryptAsyncTask extends AsyncTask<String, String, Boolean> {
 
+        private static final String TAG = DecryptAsyncTask.class.getSimpleName();
 
         private String password;
 
@@ -53,9 +52,7 @@ public class DecryptExecutor {
             try {
                 for (File file : inputFile.listFiles()) {
                     FileInputStream fileInputStream = new FileInputStream(file);
-                    SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-                    String d = dataFormat.format(new Date(System.currentTimeMillis()));
-                    FileOutputStream fileOutputStream = new FileOutputStream(new File(outputFile, d + "_result.log"));
+                    FileOutputStream fileOutputStream = new FileOutputStream(new File(outputFile, file.getName() + "_result.log"));
                     new LoganParser(password.getBytes(), password.getBytes()).parse(fileInputStream, fileOutputStream);
                     r = true;
                 }
@@ -68,7 +65,7 @@ public class DecryptExecutor {
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
-            DebugLog.i("wangxue", "onPostExecute result = " + result);
+            DebugLog.i(TAG, "onPostExecute result = " + result);
         }
     }
 }

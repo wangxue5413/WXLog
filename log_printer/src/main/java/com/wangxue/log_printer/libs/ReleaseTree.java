@@ -14,7 +14,7 @@ public class ReleaseTree extends Timber.Tree {
 
     @Override
     protected void log(int priority, @Nullable String tag, @NotNull String message, @Nullable Throwable t) {
-        Logan.w(message, 1);
+        Logan.w("TAG:" + tag + " => " + message, 1);
         Logan.f();
     }
 }

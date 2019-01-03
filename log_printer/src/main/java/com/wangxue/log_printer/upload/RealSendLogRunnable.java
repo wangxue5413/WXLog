@@ -53,11 +53,15 @@ public class RealSendLogRunnable extends SendLogRunnable implements ISendLog {
 
     @Override
     public void sendLog(File logFile) {
-        try {
-            doNetWork(new FileInputStream(logFile));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            DebugLog.e(TAG, "Log file is not found!");
+        if(logFile != null && logFile.exists() && logFile.length() > 0) {
+            try {
+                doNetWork(new FileInputStream(logFile));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                DebugLog.e(TAG, "Log file is not found!");
+            }
+        } else {
+            DebugLog.e(TAG, "Log file is not exist!");
         }
     }
 
