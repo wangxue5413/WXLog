@@ -17,7 +17,9 @@ import timber.log.Timber;
 public class LogConfig {
     private static final String TAG = LogConfig.class.getSimpleName();
 
-    public static final String LOG_FILE_NAME = "log_printer";
+    private static final String LOG_FILE_NAME = "log_printer";
+
+    protected static String LOG_FILE_PATH = null;
 
     public static void init(@NonNull Context context, boolean isDebug, @NonNull String key16, @NonNull String iv16) {
         init(context, isDebug, key16, iv16, false);
@@ -51,9 +53,10 @@ public class LogConfig {
     }
 
     private static void initLogConfig(Context context, String key16, String iv16, boolean testEnable) {
+        LOG_FILE_PATH = context.getExternalFilesDir(null).getAbsolutePath() + File.separator + LOG_FILE_NAME;
         LoganConfig loganConfig = new LoganConfig.Builder()
                 .setCachePath(context.getApplicationContext().getFilesDir().getAbsolutePath())
-                .setPath(context.getExternalFilesDir(null).getAbsolutePath() + File.separator + LOG_FILE_NAME)
+                .setPath(LOG_FILE_PATH)
                 .setEncryptKey16(key16.getBytes())
                 .setEncryptIV16(iv16.getBytes())
                 .build();

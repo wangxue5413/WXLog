@@ -62,11 +62,19 @@ public class RealSendLogRunnable extends SendLogRunnable implements ISendLog {
      */
     @Override
     public void doIT() {
-        SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String d = dataFormat.format(new Date(System.currentTimeMillis()));
-        String[] temp = new String[1];
-        temp[0] = d;
-        Logan.s(temp, this);
+        if (LogConfig.LOG_FILE_PATH != null) {
+            File dir = new File(LogConfig.LOG_FILE_PATH);
+            if (dir.exists() && dir.listFiles().length > 0) {
+                SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd");
+                File[] files = dir.listFiles();
+                String[] temp = new String[files.length];
+                for (int i = 0; i < files.length; i++) {
+                    DebugLog.i(TAG, "send log $$ files name = " + files[i].getName());
+                    temp[i] = dataFormat.format(new Date(Long.parseLong(files[i].getName())));
+                }
+                Logan.s(temp, this);
+            }
+        }
     }
 
     private void doNetWork(InputStream inputData) {

@@ -21,7 +21,7 @@ allprojects {
 then add following content in the sub-project `build.gradle` file:
 
 ```groovy
-implementation 'com.wangxue.log_printer:log_printer:1.0.1'
+implementation 'com.wangxue.log_printer:log_printer:1.0.2'
 ```
 
 ### Usage
@@ -62,7 +62,7 @@ new SendLogBuilder()
 
 ### Note
 
-**See sample for more details**
+See sample for more details
 
 ### License
 

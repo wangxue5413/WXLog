@@ -6,7 +6,7 @@ publish {
     repoName = 'AndroidLibrary'
     groupId = 'com.wangxue.log_printer'
     artifactId = 'log_printer'
-    publishVersion = '1.0.1'
+    publishVersion = '1.0.2'
     desc = 'log library'
     website = 'https://github.com/wangxue5413/WXLog.git'
 }
