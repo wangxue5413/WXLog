@@ -2,7 +2,7 @@ package com.wangxue.wxlog;
 
 import android.os.AsyncTask;
 
-import com.wangxue.log_printer.libs.DebugLog;
+import com.wangxue.log_printer.LogPrinter;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,34 +14,28 @@ import java.io.FileOutputStream;
  */
 public class DecryptExecutor {
 
-    private String password;
-
     private File inputFile;
 
     private File outputFile;
 
-    public DecryptExecutor(String password, File inputFile, File outputFile) {
-        this.password = password;
+    public DecryptExecutor( File inputFile, File outputFile) {
         this.inputFile = inputFile;
         this.outputFile = outputFile;
     }
 
     public void parseLog() {
-        new DecryptAsyncTask(password, inputFile, outputFile).execute();
+        new DecryptAsyncTask(inputFile, outputFile).execute();
     }
 
     public static class DecryptAsyncTask extends AsyncTask<String, String, Boolean> {
 
         private static final String TAG = DecryptAsyncTask.class.getSimpleName();
 
-        private String password;
-
         private File inputFile;
 
         private File outputFile;
 
-        public DecryptAsyncTask(String password, File inputFile, File outputFile) {
-            this.password = password;
+        public DecryptAsyncTask(File inputFile, File outputFile) {
             this.inputFile = inputFile;
             this.outputFile = outputFile;
         }
@@ -53,7 +47,7 @@ public class DecryptExecutor {
                 for (File file : inputFile.listFiles()) {
                     FileInputStream fileInputStream = new FileInputStream(file);
                     FileOutputStream fileOutputStream = new FileOutputStream(new File(outputFile, file.getName() + "_result.log"));
-                    new LoganParser(password.getBytes(), password.getBytes()).parse(fileInputStream, fileOutputStream);
+                    new LoganParser(Constants.ENCRYPT_KEY16.getBytes(), Constants.ENCRYPT_IV16.getBytes()).parse(fileInputStream, fileOutputStream);
                     r = true;
                 }
             } catch (FileNotFoundException e) {
@@ -65,7 +59,7 @@ public class DecryptExecutor {
         @Override
         protected void onPostExecute(Boolean result) {
             super.onPostExecute(result);
-            DebugLog.i(TAG, "onPostExecute result = " + result);
+            LogPrinter.i(TAG, "onPostExecute result = " + result);
         }
     }
 }

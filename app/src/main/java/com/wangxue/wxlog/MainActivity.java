@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.wangxue.log_printer.LogPrinter;
-import com.wangxue.log_printer.upload.RealSendLogRunnable;
+import com.wangxue.log_printer.libs.SendLogBuilder;
 
 import java.util.HashMap;
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void parseLog() {
-        new DecryptExecutor("abcdefghijkmlnop", FileUtil.getInputFile(this.getApplicationContext()), FileUtil.getOutPutFile(this.getApplicationContext())).parseLog();
+        new DecryptExecutor(FileUtil.getInputFile(this.getApplicationContext()), FileUtil.getOutPutFile(this.getApplicationContext())).parseLog();
     }
 
     private void printLog() {
@@ -32,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadLog() {
-        if(BuildConfig.ENABLE_LOG_TEST || !BuildConfig.PLANT_DEBUG) {
+        if (BuildConfig.ENABLE_LOG_TEST || !BuildConfig.PLANT_DEBUG) {
             String url = "http://192.168.119.63:8080/test/logupload";//换成自己的url
             HashMap<String, String> headers = new HashMap<>();
             headers.put("Content-Type", "application/octet-stream"); //二进制流
             headers.put("client", "android");
-            new RealSendLogRunnable.SendLogBuilder()
+            new SendLogBuilder()
                     .setHeaders(headers)
-                    .setMethod(RealSendLogRunnable.SendLogBuilder.POST)
+                    .setMethod(SendLogBuilder.POST)
                     .setUrl(url)
                     .build()
                     .doIT();

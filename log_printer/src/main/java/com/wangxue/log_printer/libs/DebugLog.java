@@ -7,33 +7,33 @@ import android.util.Log;
  */
 public class DebugLog {
 
-    public static boolean ENABLE_PRINT_LOG = false;
+    protected static boolean ENABLE_PRINT_LOG = false;
 
-    public static void v(String tag, String log) {
+    protected static void v(String tag, String log) {
         if (ENABLE_PRINT_LOG) {
             Log.v(tag, log);
         }
     }
 
-    public static void d(String tag, String log) {
+    protected static void d(String tag, String log) {
         if (ENABLE_PRINT_LOG) {
             Log.d(tag, log);
         }
     }
 
-    public static void i(String tag, String log) {
+    protected static void i(String tag, String log) {
         if (ENABLE_PRINT_LOG) {
             Log.i(tag, log);
         }
     }
 
-    public static void w(String tag, String log) {
+    protected static void w(String tag, String log) {
         if (ENABLE_PRINT_LOG) {
             Log.w(tag, log);
         }
     }
 
-    public static void e(String tag, String log) {
+    protected static void e(String tag, String log) {
         if (ENABLE_PRINT_LOG) {
             Log.e(tag, log);
         }

@@ -1,13 +1,10 @@
-package com.wangxue.log_printer.upload;
+package com.wangxue.log_printer.libs;
 
-import android.support.annotation.StringDef;
 import android.text.TextUtils;
 
 import com.dianping.logan.Logan;
 import com.dianping.logan.SendLogRunnable;
 import com.wangxue.log_printer.api.ISendLog;
-import com.wangxue.log_printer.libs.DebugLog;
-import com.wangxue.log_printer.libs.HttpsUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -17,21 +14,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
 
 /**
  * Created by wangxue on 2018/12/29.
@@ -53,7 +44,7 @@ public class RealSendLogRunnable extends SendLogRunnable implements ISendLog {
 
     @Override
     public void sendLog(File logFile) {
-        if(logFile != null && logFile.exists() && logFile.length() > 0) {
+        if (logFile != null && logFile.exists() && logFile.length() > 0) {
             try {
                 doNetWork(new FileInputStream(logFile));
             } catch (FileNotFoundException e) {
@@ -183,88 +174,6 @@ public class RealSendLogRunnable extends SendLogRunnable implements ISendLog {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
                 DebugLog.e(TAG, "response result exception! message = " + e.toString());
-            }
-        }
-    }
-
-    public static class SendLogBuilder {
-        /**
-         * header集，如 key=Content-Type,value=application/json是一对
-         */
-        private HashMap<String, String> headers = new HashMap<>();
-
-        /**
-         * 请求参数，类似于header集，每个key跟value是一对
-         */
-        private HashMap<String, String> parameters = new HashMap<>();
-
-        /**
-         * https证书，可是使用本项目提供的{@link HttpsUtils}进行生成
-         */
-        private SSLSocketFactory sslSocketFactory;
-
-        /**
-         * 请求地址
-         */
-        private String url;
-
-        /**
-         * 请求方法,只支持 GET 和 POST
-         */
-        private
-        @RequestType
-        String method;
-
-        public SendLogBuilder setHeaders(HashMap<String, String> headers) {
-            if (headers != null && headers.size() > 0) {
-                this.headers = headers;
-            }
-            return this;
-        }
-
-        public SendLogBuilder setParameters(HashMap<String, String> parameters) {
-            if (parameters != null && parameters.size() > 0) {
-                this.parameters = parameters;
-            }
-            return this;
-        }
-
-        public SendLogBuilder setSSLSocketFactory(SSLSocketFactory sslSocketFactory) {
-            this.sslSocketFactory = sslSocketFactory;
-            return this;
-        }
-
-        public SendLogBuilder setUrl(String url) {
-            this.url = url;
-            return this;
-        }
-
-        public SendLogBuilder setMethod(@RequestType String method) {
-            this.method = method;
-            return this;
-        }
-
-        public RealSendLogRunnable build() {
-            if (this.url == null || this.method == null) {
-                throw new SendLogException("please specify method and url");
-            }
-            return new RealSendLogRunnable(this);
-        }
-
-
-        public static final String GET = "GET";
-
-        public static final String POST = "POST";
-
-        @Retention(RetentionPolicy.SOURCE)
-        @Target({ElementType.FIELD, ElementType.PARAMETER})
-        @StringDef({GET, POST})
-        public @interface RequestType {
-        }
-
-        public class SendLogException extends RuntimeException {
-            public SendLogException(String msg) {
-                super(msg);
             }
         }
     }

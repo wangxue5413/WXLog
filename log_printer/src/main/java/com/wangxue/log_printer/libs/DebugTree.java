@@ -10,7 +10,11 @@ import timber.log.Timber;
 /**
  * Created by wangxue on 2019/1/2.
  */
-public class DebugTree extends Timber.Tree{
+public class DebugTree extends Timber.Tree {
+
+    protected DebugTree() {
+    }
+
     @Override
     protected void log(int priority, @Nullable String tag, @NotNull String message, @Nullable Throwable t) {
         switch (priority) {
